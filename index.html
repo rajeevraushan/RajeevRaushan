@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajeev Raushan | Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* 🌈 Background */
+body {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a, #0ea5e9);
+    color: #fff;
+    scroll-behavior: smooth;
+}
+
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background: rgba(2, 6, 23, 0.7);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+}
+
+nav h1 {
+    color: #22d3ee;
+}
+
+nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #22d3ee;
+}
+
+/* Hero */
+.hero {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-text {
+    animation: fadeIn 1.5s ease;
+}
+
+.hero-text h2 {
+    font-size: 42px;
+}
+
+.hero-text span {
+    background: linear-gradient(45deg, #22d3ee, #3b82f6);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Button */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 30px;
+    background: linear-gradient(45deg, #22d3ee, #3b82f6, #0ea5e9);
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 25px #22d3ee, 0 0 50px #0ea5e9;
+}
+
+/* Sections */
+section {
+    padding: 60px 50px;
+}
+
+/* 🍏 Smooth fade sections */
+.fade-section {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 🧊 Glass Cards */
+.card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 15px;
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Glow follow */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 15px;
+    background: radial-gradient(circle at var(--x) var(--y),
+        rgba(34,211,238,0.6),
+        rgba(14,165,233,0.4),
+        transparent 50%);
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(2,6,23,0.7);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav>
+    <h1>Rajeev</h1>
+    <div>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+    <div class="hero-text">
+        <h2>Hi, I'm <span>Rajeev Raushan</span></h2>
+        <p>A passionate developer building modern web experiences.</p>
+        <a href="resume.pdf" download class="btn">⬇ Download Resume</a>
+    </div>
+</div>
+
+<!-- About -->
+<section id="about" class="fade-section">
+    <h2>About Me</h2>
+    <div class="card">
+        <p>I am Rajeev Raushan, skilled in web development and problem solving.</p>
+    </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="fade-section">
+    <h2>Projects</h2>
+
+    <div class="card">
+        <h3>Portfolio Website</h3>
+        <p>Modern responsive personal portfolio.</p>
+    </div>
+
+    <div class="card">
+        <h3>Project 2</h3>
+        <p>Add your project details here.</p>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="fade-section">
+    <h2>Contact</h2>
+    <div class="card">
+        <p>Email: rajeev.raushan211@example.com</p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Rajeev Raushan</p>
+</footer>
+
+<script>
+// 🖱️ Mouse Tilt Effect
+const cards = document.querySelectorAll(".card");
+
+cards.forEach(card => {
+    card.addEventListener("mousemove", e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = -(y - centerY) / 10;
+        const rotateY = (x - centerX) / 10;
+
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        card.style.setProperty('--x', `${x}px`);
+        card.style.setProperty('--y', `${y}px`);
+    });
+
+    card.addEventListener("mouseleave", () => {
+        card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+    });
+});
+
+// 🍏 Smooth reveal
+const sections = document.querySelectorAll('.fade-section');
+
+const revealSections = () => {
+    sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        const trigger = window.innerHeight - 100;
+
+        if (top < trigger) {
+            section.classList.add('show');
+        }
+    });
+};
+
+window.addEventListener('scroll', revealSections);
+revealSections();
+</script>
+
+</body>
+</html>
